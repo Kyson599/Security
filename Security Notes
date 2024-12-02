@@ -11,3 +11,8 @@ lin_ops#  nc 127.0.0.1 1111                                                     
 lin_ops#  nc 127.0.0.1 2222                                                                       #Will test connection to port 222 on 192.168.28.100
 lin_ops# ssh -MS /tmp/web <creds>@127.0.0.1 -p 2222                                               #Will create control socket to web server
 lin_ops# firefox                                                                                  #Use firefox to go to 127.0.0.1:1111 to go to webserver
+
+
+NMAP SCRIPTS
+  /usr/share/nmap/scripts
+smb-os-discovery
