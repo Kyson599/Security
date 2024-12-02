@@ -1,1 +1,13 @@
+Control Sockets (different method of port forwarding)
+Creates a file that represents the connection to a box. Created on linux opstation that has all of the tools.
 
+lin_ops#  ssh -MS /tmp/jump student@10.50.35.64                                                   #Create initial control socket with jumpbox
+lin_ops#  ssh -S /tmp/jump jump                                                                   #Connect to control socket to the jumpbox
+lin_ops#  ssh -S /tmp/jump jump -O forward -D9050                                                 #Create dynamic port forward to jumpbox  
+lin_ops#  proxychains nmap -Pn -T4 -vvvv 192.168.28.100                                           #Scan Tgt on network found
+lin_ops#  ssh -S /tmp/jump jump -O forward -L 1111:192.168.28.100:80 -L 2222:192.168.28.100:2222  #Create static port forwards to 80 and 2222 on 192.168.28.100
+lin_ops#  ssh -S /tmp/jump jump -O cancel -D9050                                                  #Will cancel portforward
+lin_ops#  nc 127.0.0.1 1111                                                                       #Will test connection to port 80 on 192.168.28.100
+lin_ops#  nc 127.0.0.1 2222                                                                       #Will test connection to port 222 on 192.168.28.100
+lin_ops# ssh -MS /tmp/web <creds>@127.0.0.1 -p 2222                                               #Will create control socket to web server
+lin_ops# firefox                                                                                  #Use firefox to go to 127.0.0.1:1111 to go to webserver
