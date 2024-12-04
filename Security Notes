@@ -31,3 +31,21 @@ Directory Traversal VIA
 URL
 FILE SEARCHING
 CALL A FUNCTION USING THE DEV TOOLS CONSOLE ()
+
+
+
+EASY-5STEP SQL INJECTION
+  1. Identify Vulnerable Fields
+  2. Identify # of Columns w/ Golden Statement
+  3. Edit Golden Statement
+  4. Craft Query
+  5. Get Money/Points
+
+
+
+
+
+
+
+
+
