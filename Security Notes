@@ -215,6 +215,43 @@ GTFO bins to see what commands you have sudo access to can be used to possibly e
     find / -type f -perm /6000 -ls 2>/dev/null   #FINDS BOTH
 (3)
     Check Binaries found against gtfo database to see what might work for privledge escalation.
+----------------------------------------------------------------------------------------------------------------------------
+        ###INSECURE PERMISSIONS###
+CRON STUFF
+ /etc/crontab              #SYSTEM LEVEL SCHEDULED JOBS
+ /var/spool/cron/crontab   #USER LEVEL SCHEDULED JOBS
+
+crontab 
+  -l                 #LISTS CRON JOBS FOR CURRENT USER
+  -e                 #ALLOWS EDITING OF CRON TABLE/CREATING A JOB
+  -r                 #USED TO REMOVED A CRON JOB
+  -u                 #USED TO VIEW CRON JOBS OF ANOTHER USER
+crontab.guru
+----------------------------------------------------------------------------------------------------------------------------
+       ###WORLD WRITEABLE FILES AND FOLDERS###
+  find / -type d -perm /2 -ls 2>/dev/null      #FINDS WORLD WRITEABLE DIRECTORIES
+  find / -type f -perm /2 -ls 2>/dev/null      #FINDS WORLD WRITEABLE FILES
+  /var/tmp
+  /tmp
+  ls -laitr
+  -l  #LONG LISTING
+  -a  #ALL FILES
+  -i  #INODE NUMBEr
+  -t  #TIME
+  -r  #REVERSE
+----------------------------------------------------------------------------------------------------------------------------
+    ######
+ps -p 1    #FIND OUT WHAT SYSTEM INIT IS BEING USED
+
+
+
+
+
+
+
+
+
+
 
 
 
