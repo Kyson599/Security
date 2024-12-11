@@ -204,6 +204,23 @@ use payload/linux/x86/exec
 set CMD "/.secret/.verysecret.pdb"
 generate -b '\x00' -f python
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    ###LINUX PRIVLEDGE ESCALATION, PERSISTENCE, AND COVERING YOUR TRACKS###
+GTFO bins to see what commands you have sudo access to can be used to possibly escalate prviledges.
+(1) sudo         
+  -l      #LIST ALL SUDO COMMANDS YOU CAN DO
+  -u      #RUN COMMANDS AS SOMEONE ELSE
+
+(2) find / -type f -perm /4000 -ls 2>/dev/null   #FINDS ALL FILES WITH SUID BIT SET
+    find / -type f -perm /2000 -ls 2>/dev/null   #FINDS ALL FILES WITH SGID BET SET
+    find / -type f -perm /6000 -ls 2>/dev/null   #FINDS BOTH
+(3)
+    Check Binaries found against gtfo database to see what might work for privledge escalation.
+
+
+
+
+
+
 
 
 
